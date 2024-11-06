@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.content {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button {
+  background-color:dodgerblue;
+  color: white;
+  padding: 0.25rem;
+  border-color:darkblue;
+  border-style:solid;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color:darkblue;
+}

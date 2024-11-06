@@ -1,0 +1,11 @@
+<div class="content">
+  <h3>All Job Ads</h3>
+  @if (jobs()) {
+    <ul>
+      @for (job of jobs(); track job.id) {
+        <li><a (click)="showJobDetails(job.id)">{{job.id}}. {{job.title}}:</a> <br/> {{job.translations}} {{job.textEN}} {{job.translations}}</li>
+        <button (click)="deleteJob(job.id)">Delete Job Ad</button>
+      }
+    </ul>
+  }
+</div>

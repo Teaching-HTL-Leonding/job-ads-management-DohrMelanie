@@ -37,4 +37,7 @@ export class JobManagementService {
     return firstValueFrom(this.httpClient.get<Job>(`${this.baseUrl}/ads/${jobId}`))
   }
 
+  updateJob(job: Job): Promise<void> {
+    return firstValueFrom(this.httpClient.patch<void>(`${this.baseUrl}/ads/${job.id}`, job));
+  }
 }

@@ -1,0 +1,18 @@
+.input-field {
+  display:flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 20px;
+}
+
+
+button {
+  margin-top: 10px;
+}

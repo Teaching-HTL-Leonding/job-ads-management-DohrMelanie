@@ -8,11 +8,10 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './all-jobs.component.html',
-  styleUrl: './all-jobs.component.css'
+  styleUrl: './all-jobs.component.css',
 })
-export class AllJobsComponent implements OnInit{
-  constructor(private router: Router) {
-  }
+export class AllJobsComponent implements OnInit {
+  constructor(private router: Router) {}
   jobs = signal<Job[] | undefined>(undefined);
   private service: JobManagementService = inject(JobManagementService);
 

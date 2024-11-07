@@ -1,36 +1,48 @@
 <div class="content">
-  <h3>Job Detail: {{jobId()}}</h3>
+  <h3>Job Detail: {{ jobId() }}</h3>
   @if(jobId() != -1) {
-    <form>
+  <form>
+    <div class="input-field">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" [(ngModel)]="title" />
+    </div>
+    <div class="input-field">
+      <label for="textEN">Text EN</label>
+      <input type="text" id="textEN" name="textEN" [(ngModel)]="textEN" />
+    </div>
+    <button (click)="updateJob()">Update</button>
+    @for (translation of translations(); track $index) {
+    <div>
+      <p>{{ translation.language }}:</p>
+      <p>{{ translation.translatedText }}</p>
+      <button (click)="deleteTranslation(translation.language)">
+        Delete Translation
+      </button>
+    </div>
+    }
+    <div>
+      <h3>New Translation</h3>
       <div class="input-field">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" [(ngModel)]="title"/>
+        <label for="lang">Language</label>
+        <input
+          type="text"
+          id="lang"
+          name="lang"
+          [(ngModel)]="lang"
+          class="lang-input"
+        />
+        <label for="translatedText">Translated Text</label>
+        <input
+          type="text"
+          id="translatedText"
+          name="translatedText"
+          [(ngModel)]="translatedText"
+        />
       </div>
-      <div class="input-field">
-        <label for="textEN">Text EN</label>
-        <input type="text" id="textEN" name="textEN" [(ngModel)]="textEN"/>
-      </div>
-      <button (click)="updateJob()">Update</button>
-      @for (translation of translations(); track $index) {
-        <div>
-          <p>{{translation.language}}:</p>
-          <p>{{translation.translatedText}}</p>
-          <button (click)="deleteTranslation(translation.language)">Delete Translation</button>
-        </div>
-      }
-      <div>
-        <h3>New Translation</h3>
-        <div class="input-field">
-          <label for="lang">Language</label>
-          <input type="text" id="lang" name="lang" [(ngModel)]="lang" class="lang-input"/>
-          <label for="translatedText">Translated Text</label>
-          <input type="text" id="translatedText" name="translatedText" [(ngModel)]="translatedText"/>
-        </div>
-        <button (click)="addTranslation()">Add Translation</button>
-        <button (click)="autoTranslate()">Auto-Translate</button>
-      </div>
-    </form>
+      <button (click)="addTranslation()">Add Translation</button>
+      <button (click)="autoTranslate()">Auto-Translate</button>
+    </div>
+  </form>
   }
   <button (click)="returnToAllJobs()">Return to all jobs</button>
 </div>
-

@@ -10,6 +10,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     { provide: BASE_URL, useValue: 'http://localhost:3000' },
-    provideHttpClient(withFetch())
-  ]
+    provideHttpClient(withFetch()),
+  ],
 };

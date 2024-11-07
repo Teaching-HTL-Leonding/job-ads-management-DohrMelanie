@@ -1,0 +1,30 @@
+.input-field {
+  display:flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 20px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.content {
+  margin: 20px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+.lang-input {
+  width: 10%;
+  padding: 5px;
+}

@@ -11,6 +11,19 @@
         <input type="text" id="textEN" name="textEN" [(ngModel)]="textEN"/>
       </div>
       <button (click)="updateJob()">Update</button>
+      @for (translation of translations(); track $index) {
+        <div>
+          <p>{{translation.language}}:</p>
+          <p>{{translation.translatedText}}</p>
+          <button (click)="deleteTranslation(translation.language)">Delete Translation</button>
+        </div>
+      }
+      <h3>New Translation</h3>
+      <div class="input-field">
+        <label for="lang">Language</label>
+        <input type="text" id="lang" name="lang" [(ngModel)]="lang" class="lang-input"/>
+      </div>
+      <button (click)="addTranslation()">Add Translation</button>
     </form>
   }
 </div>

@@ -12,7 +12,19 @@ input {
   padding: 20px;
 }
 
-
 button {
   margin-top: 10px;
+}
+
+.content {
+  margin: 20px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+.lang-input {
+  width: 10%;
+  padding: 5px;
 }

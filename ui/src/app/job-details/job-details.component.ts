@@ -16,18 +16,32 @@ export class JobDetailsComponent implements OnInit {
   title = signal<string>("");
   textEN = signal<string>("");
   translations = signal<Translation[]>([]);
+  lang = signal<string>("");
 
   constructor(private route: ActivatedRoute) {  }
 
   async ngOnInit() {
     const id: string | null = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const job: Job = await this.service.getJobById(parseInt(id));
-      this.title.set(job.title);
-      this.jobId.set(job.id);
-      this.textEN.set(job.textEN);
-      this.translations.set(job.translations);
+      await this.setJobProperties(parseInt(id));
     }
+  }
+  async setJobProperties(id: number) {
+    const job: Job = await this.service.getJobById(id);
+    this.title.set(job.title);
+    this.jobId.set(job.id);
+    this.textEN.set(job.textEN);
+    this.translations.set(job.translations);
+  }
+
+  async addTranslation() {
+    await this.service.addTranslation(this.jobId(), this.lang());
+    await this.setJobProperties(this.jobId());
+  }
+
+  async deleteTranslation(lang: string) {
+    await this.service.deleteTranslation(this.jobId(), lang);
+    await this.setJobProperties(this.jobId());
   }
 
   updateJob() {

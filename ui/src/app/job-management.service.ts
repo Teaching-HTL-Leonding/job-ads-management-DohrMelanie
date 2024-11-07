@@ -25,19 +25,41 @@ export class JobManagementService {
 
   constructor() { }
 
-  getAllJobs(): Promise<Job[]> {
+  public getAllJobs(): Promise<Job[]> {
     return firstValueFrom(this.httpClient.get<Job[]>(`${this.baseUrl}/ads`));
   }
 
-  deleteJob(jobId: number): Promise<void> {
+  public deleteJob(jobId: number): Promise<void> {
     return firstValueFrom(this.httpClient.delete<void>(`${this.baseUrl}/ads/${jobId}`));
   }
 
-  getJobById(jobId: number): Promise<Job> {
-    return firstValueFrom(this.httpClient.get<Job>(`${this.baseUrl}/ads/${jobId}`))
+  public getJobById(jobId: number): Promise<Job> {
+    return firstValueFrom(this.httpClient.get<Job>(`${this.baseUrl}/ads/${jobId}`));
   }
 
-  updateJob(job: Job): Promise<void> {
+  public updateJob(job: Job): Promise<void> {
     return firstValueFrom(this.httpClient.patch<void>(`${this.baseUrl}/ads/${job.id}`, job));
+  }
+
+  public async addTranslation(jobId: number, lang: string): Promise<void> {
+    const job: Job = await this.getJobById(jobId);
+    const translate = {
+      text: job.textEN,
+      source_lang: "EN",
+      target_lang: lang
+    }
+    type TranslationResp = {
+      translation: string
+    }
+    const translated: TranslationResp = await firstValueFrom(this.httpClient.post<TranslationResp>(`${this.baseUrl}/deepl/v2/translate`, translate));
+    console.log(translated.translation);
+
+    return firstValueFrom(this.httpClient.put<void>(`${this.baseUrl}/ads/${jobId}/translations/${lang}`, {
+      translatedText: translated.translation
+    }));
+  }
+
+  public async deleteTranslation(jobId: number, lang: string) {
+    return firstValueFrom(this.httpClient.delete(`${this.baseUrl}/ads/${jobId}/translations/${lang}`))
   }
 }

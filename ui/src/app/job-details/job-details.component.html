@@ -18,12 +18,17 @@
           <button (click)="deleteTranslation(translation.language)">Delete Translation</button>
         </div>
       }
-      <h3>New Translation</h3>
-      <div class="input-field">
-        <label for="lang">Language</label>
-        <input type="text" id="lang" name="lang" [(ngModel)]="lang" class="lang-input"/>
+      <div>
+        <h3>New Translation</h3>
+        <div class="input-field">
+          <label for="lang">Language</label>
+          <input type="text" id="lang" name="lang" [(ngModel)]="lang" class="lang-input"/>
+          <label for="translatedText">Translated Text</label>
+          <input type="text" id="translatedText" name="translatedText" [(ngModel)]="translatedText"/>
+        </div>
+        <button (click)="addTranslation()">Add Translation</button>
+        <button (click)="autoTranslate()">Auto-Translate</button>
       </div>
-      <button (click)="addTranslation()">Add Translation</button>
     </form>
   }
   <button (click)="returnToAllJobs()">Return to all jobs</button>

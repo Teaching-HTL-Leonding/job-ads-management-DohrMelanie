@@ -41,7 +41,18 @@ export class JobManagementService {
     return firstValueFrom(this.httpClient.patch<void>(`${this.baseUrl}/ads/${job.id}`, job));
   }
 
-  public async addTranslation(jobId: number, lang: string): Promise<void> {
+  public async addTranslation(jobId: number, lang: string, translated: string): Promise<void> {
+    const job: Job = await this.getJobById(jobId);
+    return firstValueFrom(this.httpClient.put<void>(`${this.baseUrl}/ads/${jobId}/translations/${lang}`, {
+      translatedText: translated
+    }));
+  }
+
+  public async deleteTranslation(jobId: number, lang: string) {
+    return firstValueFrom(this.httpClient.delete(`${this.baseUrl}/ads/${jobId}/translations/${lang}`))
+  }
+
+  public async autoTranslate(jobId: number, lang: string) {
     const job: Job = await this.getJobById(jobId);
     const translate = {
       text: job.textEN,
@@ -57,9 +68,5 @@ export class JobManagementService {
     return firstValueFrom(this.httpClient.put<void>(`${this.baseUrl}/ads/${jobId}/translations/${lang}`, {
       translatedText: translated.translation
     }));
-  }
-
-  public async deleteTranslation(jobId: number, lang: string) {
-    return firstValueFrom(this.httpClient.delete(`${this.baseUrl}/ads/${jobId}/translations/${lang}`))
   }
 }

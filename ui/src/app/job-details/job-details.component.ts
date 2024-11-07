@@ -16,6 +16,7 @@ export class JobDetailsComponent implements OnInit {
   title = signal<string>("");
   textEN = signal<string>("");
   translations = signal<Translation[]>([]);
+  translatedText = signal<string>("");
   lang = signal<string>("");
 
   constructor(private route: ActivatedRoute, private router: Router) {  }
@@ -35,7 +36,11 @@ export class JobDetailsComponent implements OnInit {
   }
 
   async addTranslation() {
-    await this.service.addTranslation(this.jobId(), this.lang());
+    await this.service.addTranslation(this.jobId(), this.lang(), this.translatedText());
+    await this.setJobProperties(this.jobId());
+  }
+  async autoTranslate() {
+    await this.service.autoTranslate(this.jobId(), this.lang());
     await this.setJobProperties(this.jobId());
   }
 

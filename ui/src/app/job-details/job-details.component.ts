@@ -1,5 +1,5 @@
 import { Component, signal, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {FormsModule} from "@angular/forms"
 import { Job, Translation, JobManagementService } from '../job-management.service';
 
@@ -18,7 +18,7 @@ export class JobDetailsComponent implements OnInit {
   translations = signal<Translation[]>([]);
   lang = signal<string>("");
 
-  constructor(private route: ActivatedRoute) {  }
+  constructor(private route: ActivatedRoute, private router: Router) {  }
 
   async ngOnInit() {
     const id: string | null = this.route.snapshot.paramMap.get('id');
@@ -52,5 +52,9 @@ export class JobDetailsComponent implements OnInit {
       textEN: this.textEN()
     }
     this.service.updateJob(job);
+  }
+
+  returnToAllJobs() {
+    this.router.navigate(["/all-jobs"]);
   }
 }
